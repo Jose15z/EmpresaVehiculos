@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lblReserbas" layoutX="205.0" layoutY="34.0" pickOnBounds="false" text="Reservas" textAlignment="JUSTIFY">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblReservas" layoutX="123.0" layoutY="416.0" prefHeight="200.0" prefWidth="304.0" AnchorPane.bottomAnchor="14.0">
+        <columns>
+          <TableColumn fx:id="tbcId" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="tbcVehiculo" prefWidth="75.0" text="Vehiculo" />
+            <TableColumn fx:id="tbcDIas" prefWidth="75.0" text="Dias " />
+            <TableColumn fx:id="tbcCosto" prefWidth="75.0" text="Costo" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblCliente" layoutX="151.0" layoutY="81.0" text="Cliente">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNombreCliente" layoutX="311.0" layoutY="81.0" text="Nombre Cliente" />
+      <Button fx:id="btnAgregar" layoutX="150.0" layoutY="369.0" mnemonicParsing="false" onAction="#onAgregarReservaCliente" text="Agregar" />
+      <Button fx:id="btnEditar" layoutX="246.0" layoutY="369.0" mnemonicParsing="false" text="Editar" />
+      <Button fx:id="btnEliminar" layoutX="327.0" layoutY="369.0" mnemonicParsing="false" onAction="#onEliminarReservaCliente" text="Eliminar" />
+      <Label fx:id="lblVehiculo" layoutX="153.0" layoutY="191.0" text="Vehiculo" />
+      <Label fx:id="lblDias" layoutX="157.0" layoutY="237.0" text="Dias" />
+      <Label fx:id="lblCosto" layoutX="156.0" layoutY="294.0" text="Costo" />
+      <Label fx:id="lblId" layoutX="151.0" layoutY="130.0" text="Id" />
+      <TextField fx:id="txfId" layoutX="270.0" layoutY="125.0" />
+      <TextField fx:id="txfVehiculo" layoutX="270.0" layoutY="186.0" />
+      <TextField fx:id="txfDias" layoutX="270.0" layoutY="232.0" />
+      <TextField fx:id="txfCosto" layoutX="270.0" layoutY="289.0" />
+   </children>
+</AnchorPane>
