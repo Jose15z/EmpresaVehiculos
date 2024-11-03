@@ -275,6 +275,10 @@ public class Empresa {
         return clienteEncontrado;
     }
 
+    
+
+    
+
     /**
      * Método para editar los datos de un cliente existente
      */

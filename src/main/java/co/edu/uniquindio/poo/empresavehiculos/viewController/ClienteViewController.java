@@ -186,7 +186,6 @@ public class ClienteViewController {
 
         tblListaClientes.refresh();
         limpiarSeleccion();
-        limpiarCamposCliente();
     }
     
     private void limpiarSeleccion() {

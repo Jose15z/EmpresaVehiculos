@@ -10,6 +10,9 @@ import co.edu.uniquindio.poo.empresavehiculos.controller.ReservaController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +44,7 @@ public class ReservaViewController {
     private Label lblDias;
 
     @FXML
-    private TableColumn<Reserva, Vehiculo> tbcVehiculo;
+    private TableColumn<Reserva, String> tbcVehiculo;
 
     @FXML
     private TextField txfCosto;
@@ -77,7 +80,7 @@ public class ReservaViewController {
     private Label lblCliente;
 
     @FXML
-    private TableColumn<?, ?> tbcCliente;
+    private TableColumn<Reserva, String> tbcCliente;
 
     @FXML
     private Button btnAgregarReserva;
@@ -91,8 +94,7 @@ public class ReservaViewController {
     @FXML
     private TextField txfVehiculo;
 
-    @FXML
-    private Label lblCosto;
+   
 
     @FXML
     void onAgregarReservaCliente() {
@@ -121,12 +123,82 @@ public class ReservaViewController {
         tblListaReservas.getItems().clear();
 
         // Agregar los elementos a la tabla
-        tblListaReservas.setItems(listClientes);
+        tblListaReservas.setItems(listReservas);
 
         // Seleccionar elemento de la tabla
         listenerSelection();
     }
 
+    private void obtenerReservas() {
+        listReservas.addAll(reservaController.obtenerListarReservas());
+    }
+
+    private void listenerSelection(){
+        tblListaReservas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedReserva = newSelection;
+            mostrarInformacionReserva(selectedReserva);
+        });
+    }
+
+    private void mostrarInformacionReserva(Reserva reserva){
+        if(reserva != null){
+            txfId.setText(reserva.getId());
+            txfClienteReserva.setText(reserva.getCliente().getCedula());
+            txfVehiculo.setText(reserva.getVehiculo().getNumeroMatricula());
+            txfDias.setText(String.valueOf(reserva.getDias()));
+        }
+    }
+
+    private void agregarReserva(){
+        Reserva reserva = buildReserva();
+        reservaController.crearReserva(reserva);
+        listReservas.add(reserva);
+        limpiarCamposReserva();
+    }
+
+    private void editarReserva(){
+
+        reservaController.editarReserva(selectedReserva.getId(), buildReserva());
+
+        int index = listReservas.indexOf(selectedReserva);
+        if(index>=0){
+            listReservas.set(index, buildReserva());
+        }
+
+        tblListaReservas.refresh();
+        limpiarSeleccion();
+        
+    }
+
+    private void limpiarSeleccion() {
+        tblListaReservas.getSelectionModel().clearSelection();
+        limpiarCamposReserva();
+    }
+
+    private Reserva buildReserva(){
+        Reserva reserva = new Reserva(txfId.getText(), app.empresa.buscarCliente(txfClienteReserva.getText()) , app.empresa.buscarVehiculo(txfVehiculo.getText()), Integer.parseInt(txfDias.getText()));
+        return reserva;
+    }
+
+    private void eliminarReserva(){
+
+        reservaController.eliminarReserva(txfId.getText());
+        listReservas.remove(selectedReserva);
+        limpiarSeleccion();
+    }
+    private void limpiarCamposReserva(){
+        txfClienteReserva.clear();
+        txfDias.clear();
+        txfId.clear();
+        txfVehiculo.clear();
+    }
+    private void initDataBinding(){
+        tbcCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getCedula()));
+        tbcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        tbcVehiculo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVehiculo().getNumeroMatricula()));
+        tbcDias.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getDias()));
+        tbcCosto.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getVehiculo().calcularTarifaAdicional()));
+    }
     @FXML
     void initialize() {
         reservaController = new ReservaController(app.empresa);
