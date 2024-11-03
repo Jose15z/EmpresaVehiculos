@@ -27,4 +27,8 @@ public class ClienteController {
     public void editarCliente(String cedula, Cliente cliente) {
        empresa.editarCliente(cedula, cliente);
     }
+
+    public void verReservasCliente(Cliente cliente){
+        cliente.getReservas();
+    }
 }

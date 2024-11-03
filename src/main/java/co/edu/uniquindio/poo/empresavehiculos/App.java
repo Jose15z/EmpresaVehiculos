@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.empresavehiculos;
 
+import java.time.Year;
 import javafx.application.Application;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,7 @@ public class App extends Application{
     }
 
     private void openViewPrincipal() {
+        inicializarData();
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("menu.fxml"));
@@ -105,5 +107,17 @@ public class App extends Application{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+
+    public void inicializarData(){
+        Cliente cliente = new Cliente("Camilo", "12345", "323768");
+        empresa.agregarCliente(cliente);
+        
+        Auto auto = new Auto("GXP 748", "KIA", "Sportage", Year.of(2009), (short) 4);
+        empresa.agregarVehiculo(auto);
+
+        Reserva reserva = new Reserva("01", cliente, auto, 0);
+        empresa.agregarReserva(reserva);
     }
 }
