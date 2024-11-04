@@ -94,6 +94,8 @@ public class ReservaViewController {
     @FXML
     private TextField txfVehiculo;
 
+    @FXML
+    private Button btnInicio;
    
 
     @FXML
@@ -109,6 +111,11 @@ public class ReservaViewController {
     @FXML
     void onEliminarReservaCliente() {
         eliminarReserva();
+    }
+
+    @FXML
+    void onAbrirMenu() {
+        app.openViewPrincipal();
     }
 
 
@@ -196,8 +203,8 @@ public class ReservaViewController {
         tbcCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getCedula()));
         tbcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         tbcVehiculo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVehiculo().getNumeroMatricula()));
-        tbcDias.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getDias()));
-        tbcCosto.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getVehiculo().calcularTarifaAdicional()));
+        tbcDias.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getDias()).asObject());
+        tbcCosto.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getVehiculo().calcularTarifaAdicional()).asObject());
     }
     @FXML
     void initialize() {

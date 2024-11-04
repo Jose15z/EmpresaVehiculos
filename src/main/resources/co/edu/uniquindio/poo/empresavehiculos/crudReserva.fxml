@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.empresavehiculos.viewController.ReservaViewController">
    <children>
-      <Label fx:id="lblReserbas" layoutX="205.0" layoutY="21.0" pickOnBounds="false" text="Reservas" textAlignment="JUSTIFY">
+      <Label fx:id="lblReservas" layoutX="205.0" layoutY="21.0" pickOnBounds="false" text="Reservas" textAlignment="JUSTIFY">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
@@ -21,7 +21,7 @@
             <TableColumn fx:id="tbcCosto" minWidth="0.0" prefWidth="108.0" text="Costo" />
         </columns>
       </TableView>
-      <Label fx:id="lblCliente" layoutX="175.0" layoutY="93.0" text="Cliente">
+      <Label fx:id="lblCliente" layoutX="152.0" layoutY="93.0" text="Cliente (C.C):">
          <font>
             <Font size="15.0" />
          </font>
@@ -29,19 +29,19 @@
       <Button fx:id="btnAgregarReserva" layoutX="152.0" layoutY="315.0" mnemonicParsing="false" onAction="#onAgregarReservaCliente" text="Agregar" />
       <Button fx:id="btnEditar" layoutX="246.0" layoutY="315.0" mnemonicParsing="false" onAction="#onEditarReserva" prefHeight="25.0" prefWidth="59.0" text="Editar" />
       <Button fx:id="btnEliminarReserva" layoutX="344.0" layoutY="315.0" mnemonicParsing="false" onAction="#onEliminarReservaCliente" text="Eliminar" />
-      <Label fx:id="lblVehiculo" layoutX="173.0" layoutY="175.0" text="Vehículo">
+      <Label fx:id="lblVehiculo" layoutX="61.0" layoutY="168.0" prefHeight="39.0" prefWidth="171.0" text="Matrícula del Vehículo:" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="389.0">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label fx:id="lblDias" layoutX="173.0" layoutY="220.0" text="Días">
+      <Label fx:id="lblDias" layoutX="117.0" layoutY="220.0" text="Días de reserva:">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label fx:id="lblCosto" layoutX="176.0" layoutY="265.0" text="Costo">
+      <Label fx:id="lblCosto" layoutX="85.0" layoutY="265.0" text="Costo de la reserva:">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label fx:id="lblId" layoutX="174.0" layoutY="132.0" text="Id">
+      <Label fx:id="lblId" layoutX="202.0" layoutY="132.0" text="Id:">
          <font>
             <Font size="17.0" />
          </font></Label>
@@ -50,5 +50,6 @@
       <TextField fx:id="txfDias" layoutX="253.0" layoutY="220.0" />
       <TextField fx:id="txfCosto" layoutX="253.0" layoutY="265.0" />
       <TextField fx:id="txfClienteReserva" layoutX="254.0" layoutY="91.0" prefHeight="25.0" prefWidth="149.0" />
+      <Button fx:id="btnInicio" layoutX="26.0" layoutY="32.0" mnemonicParsing="false" onAction="#onAbrirMenu" text="Inicio" />
    </children>
 </AnchorPane>

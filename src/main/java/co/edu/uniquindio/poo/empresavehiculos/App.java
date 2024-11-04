@@ -33,7 +33,7 @@ public class App extends Application{
         openViewPrincipal();
     }
 
-    private void openViewPrincipal() {
+    public void openViewPrincipal() {
         inicializarData();
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -111,13 +111,19 @@ public class App extends Application{
 
 
     public void inicializarData(){
-        Cliente cliente = new Cliente("Camilo", "12345", "323768");
-        empresa.agregarCliente(cliente);
-        
-        Auto auto = new Auto("GXP 748", "KIA", "Sportage", Year.of(2009), (short) 4);
-        empresa.agregarVehiculo(auto);
+        Cliente cliente0 = new Cliente("Camilo", "12345", "323768");
+        empresa.agregarCliente(cliente0);
 
-        Reserva reserva = new Reserva("01", cliente, auto, 0);
+        Cliente cliente1 = new Cliente("Juan", "0987", "231231");
+        empresa.agregarCliente(cliente1);
+        
+        Auto auto0 = new Auto("GXP 748", "KIA", "Sportage", Year.of(2009), (short) 4);
+        empresa.agregarVehiculo(auto0);
+
+        Camioneta camioneta0 = new Camioneta("WZR 999", "toyota", "Hilux", Year.of(2022), 235.5);
+        empresa.agregarVehiculo(camioneta0);
+
+        Reserva reserva = new Reserva("01", cliente0, auto0, 1);
         empresa.agregarReserva(reserva);
     }
 }

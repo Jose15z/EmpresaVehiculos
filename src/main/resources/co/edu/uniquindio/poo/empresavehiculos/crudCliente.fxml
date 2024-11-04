@@ -35,6 +35,7 @@
                   <Button fx:id="btnEditarCliente" layoutX="127.0" layoutY="233.0" mnemonicParsing="false" onAction="#onEditarCliente" prefHeight="25.0" prefWidth="66.0" text="Editar" />
                   <Button fx:id="btnEliminarCliente" layoutX="207.0" layoutY="233.0" mnemonicParsing="false" onAction="#onEliminarCliente" prefHeight="25.0" prefWidth="66.0" text="Eliminar" />
                   <Button fx:id="btnLimpiarSeleccion" layoutX="391.0" layoutY="233.0" mnemonicParsing="false" onAction="#onLimpiarSeleccion" prefHeight="25.0" prefWidth="99.0" text="Limpiar Seleccion" />
+                  <Button fx:id="btnInicio" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onAbrirMenu" prefHeight="30.0" prefWidth="47.0" text="Inicio" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
