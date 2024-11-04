@@ -94,11 +94,6 @@ public class ClienteViewController {
     }
 
     @FXML
-    void onVerReservasCliente() {
-        verReservasCliente();
-    }
-
-    @FXML
     void onEditarCliente() {
         editarCliente();
     }
@@ -169,11 +164,6 @@ public class ClienteViewController {
         listClientes.add(cliente);
         limpiarCamposCliente();
         
-    }
-
-    private void verReservasCliente(){
-        clienteController.verReservasCliente(selectedCliente);
-
     }
 
     private Cliente buildCliente() {

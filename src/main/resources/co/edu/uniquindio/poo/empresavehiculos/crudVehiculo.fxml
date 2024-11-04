@@ -5,49 +5,60 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.empresavehiculos.viewController.VehiculoViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.empresavehiculos.viewController.VehiculoViewController">
    <children>
-      <Label layoutX="209.0" layoutY="39.0" text="Manejo de Vehiculos">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblMarca" layoutX="174.0" layoutY="77.0" text="Marca">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblModelo" layoutX="174.0" layoutY="112.0" text="Modelo">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblMatricula" layoutX="174.0" layoutY="148.0" text="Matricula">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txfMarca" layoutX="264.0" layoutY="78.0" />
-      <TextField fx:id="txfModelo" layoutX="264.0" layoutY="113.0" />
-      <TextField fx:id="txfMatricula" layoutX="264.0" layoutY="149.0" />
-      <TableView fx:id="tblListVehiculos" layoutX="7.0" layoutY="305.0" prefHeight="200.0" prefWidth="588.0">
-        <columns>
-          <TableColumn fx:id="tbcMarca" prefWidth="146.0" text="Marca" />
-          <TableColumn fx:id="tbcModelo" prefWidth="151.0" text="Modelo" />
-            <TableColumn fx:id="tbcMatricula" prefWidth="155.0" text="Matricula" />
-            <TableColumn fx:id="tbcAño" prefWidth="135.0" text="Año" />
-        </columns>
-      </TableView>
-      <Label fx:id="lblAño" layoutX="174.0" layoutY="186.0" text="Año">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txfAño" layoutX="264.0" layoutY="187.0" />
-      <Button fx:id="btnAgregarVehiculo" layoutX="95.0" layoutY="241.0" mnemonicParsing="false" onAction="#onAgregarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Agegar" />
-      <Button fx:id="btnVerReservasCliente" layoutX="421.0" layoutY="241.0" mnemonicParsing="false" onAction="#onVerReserva" text="Ver Reservas" />
-      <Button fx:id="btnEliminarCliente" layoutX="203.0" layoutY="241.0" mnemonicParsing="false" onAction="#onEliminarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Eliminar " />
-      <Button fx:id="btnEditarVehiculo" layoutX="314.0" layoutY="241.0" mnemonicParsing="false" onAction="#onEditarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Editar " />
+      <SplitPane dividerPositions="0.5742574257425742" layoutX="8.0" layoutY="7.0" orientation="VERTICAL" prefHeight="507.0" prefWidth="580.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="533.0">
+               <children>
+                  <Label fx:id="lblMarca" layoutX="164.0" layoutY="69.0" text="Marca">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnAgregarVehiculo" layoutX="37.0" layoutY="239.0" mnemonicParsing="false" onAction="#onAgregarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Agegar" />
+                  <Label layoutX="244.0" layoutY="14.0" text="Vehiculos">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblModelo" layoutX="164.0" layoutY="106.0" text="Modelo">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblMatricula" layoutX="164.0" layoutY="141.0" text="Matricula">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAño" layoutX="164.0" layoutY="177.0" text="Año">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txfMarca" layoutX="266.0" layoutY="72.0" />
+                  <TextField fx:id="txfModelo" layoutX="266.0" layoutY="109.0" />
+                  <TextField fx:id="txfMatricula" layoutX="266.0" layoutY="144.0" />
+                  <TextField fx:id="txfAño" layoutX="266.0" layoutY="180.0" />
+                  <Button fx:id="btnEliminarCliente" layoutX="308.0" layoutY="239.0" mnemonicParsing="false" onAction="#onEliminarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Eliminar " />
+                  <Button fx:id="btnEditarVehiculo" layoutX="164.0" layoutY="239.0" mnemonicParsing="false" onAction="#onEditarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Editar " />
+                  <Button fx:id="btnVerReservasCliente1" layoutX="438.0" layoutY="239.0" mnemonicParsing="false" onAction="#onVerReserva" text="Limpiar selección" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="tblListVehiculos" prefHeight="200.0" prefWidth="588.0">
+                    <columns>
+                      <TableColumn fx:id="tbcMarca" prefWidth="146.0" text="Marca" />
+                      <TableColumn fx:id="tbcModelo" prefWidth="151.0" text="Modelo" />
+                        <TableColumn fx:id="tbcMatricula" prefWidth="155.0" text="Matricula" />
+                        <TableColumn fx:id="tbcAño" prefWidth="135.0" text="Año" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>

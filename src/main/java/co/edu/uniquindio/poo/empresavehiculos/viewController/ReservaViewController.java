@@ -47,9 +47,6 @@ public class ReservaViewController {
     private TableColumn<Reserva, String> tbcVehiculo;
 
     @FXML
-    private TextField txfCosto;
-
-    @FXML
     private TextField txfId;
 
     @FXML
@@ -118,6 +115,11 @@ public class ReservaViewController {
         app.openViewPrincipal();
     }
 
+    @FXML
+    void onLimpiarSeleccion() {
+        limpiarSeleccion();
+    }
+
 
     private void initView() {
         // Traer los datos del cliente a la tabla
@@ -163,18 +165,26 @@ public class ReservaViewController {
         limpiarCamposReserva();
     }
 
-    private void editarReserva(){
-
-        reservaController.editarReserva(selectedReserva.getId(), buildReserva());
-
-        int index = listReservas.indexOf(selectedReserva);
-        if(index>=0){
-            listReservas.set(index, buildReserva());
+    private void editarReserva() {
+        if (selectedReserva == null) {
+            // Mostrar mensaje al usuario de que debe seleccionar una reserva para editar
+            return;
         }
-
+    
+        // Crear una nueva reserva con los valores actualizados
+        Reserva nuevaReserva = buildReserva();
+    
+        // Actualizar la reserva seleccionada en el controlador
+        reservaController.editarReserva(selectedReserva.getId(), nuevaReserva);
+    
+        // Actualizar la lista y refrescar la tabla
+        int index = listReservas.indexOf(selectedReserva);
+        if (index >= 0) {
+            listReservas.set(index, nuevaReserva);
+        }
+    
         tblListaReservas.refresh();
         limpiarSeleccion();
-        
     }
 
     private void limpiarSeleccion() {
