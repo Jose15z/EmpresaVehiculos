@@ -1,131 +1,161 @@
 package co.edu.uniquindio.poo.empresavehiculos.viewController;
 
 import co.edu.uniquindio.poo.empresavehiculos.App;
-import co.edu.uniquindio.poo.empresavehiculos.model.Cliente;
-import co.edu.uniquindio.poo.empresavehiculos.model.Reserva;
+import co.edu.uniquindio.poo.empresavehiculos.model.Auto;
+import co.edu.uniquindio.poo.empresavehiculos.model.Camioneta;
+import co.edu.uniquindio.poo.empresavehiculos.model.Moto;
+import co.edu.uniquindio.poo.empresavehiculos.model.Transmision;
 import co.edu.uniquindio.poo.empresavehiculos.model.Vehiculo;
-import co.edu.uniquindio.poo.empresavehiculos.controller.ClienteController;
-import co.edu.uniquindio.poo.empresavehiculos.controller.ReservaController;
 import co.edu.uniquindio.poo.empresavehiculos.controller.VehiculoController;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+
+import java.time.Year;
 
 public class VehiculoViewController {
 
-    VehiculoController vehiculoController;
-    ObservableList<Vehiculo> listVehiculos = FXCollections.observableArrayList();
-    Vehiculo selectedVehiculo;
-    private App app;
+    @FXML
+    private TextField txfMarca, txfModelo, txfMatricula, txfAño;
 
     @FXML
-    private TextField txfAño;
+    private ComboBox<String> cmbTipoVehiculo;
 
     @FXML
-    private Button btnVerReservasCliente;
-
-    @FXML
-    private TableColumn<Vehiculo, String> tbcMarca;
-
-    @FXML
-    private TableColumn<Vehiculo, String> tbcMatricula;
-
-    @FXML
-    private Label lblAño;
-
-    @FXML
-    private Button btnEditarVehiculo;
-
-    @FXML
-    private TableColumn<Vehiculo, String> tbcAño;
-
-    @FXML
-    private Label lblMarca;
-
-    @FXML
-    private Button btnAgregarVehiculo;
-
-    @FXML
-    private TextField txfMatricula;
-
-    @FXML
-    private TextField txfModelo;
+    private VBox vboxSpecificFields;
 
     @FXML
     private TableView<Vehiculo> tblListVehiculos;
 
     @FXML
-    private Button btnEliminarCliente;
+    private TableColumn<Vehiculo, String> tbcMarca, tbcModelo, tbcMatricula, tbcAño;
+
+    private ObservableList<Vehiculo> listVehiculos = FXCollections.observableArrayList();
+    private VehiculoController vehiculoController;
+    private Vehiculo selectedVehiculo;
+    private App app;
 
     @FXML
-    private TableColumn<Vehiculo, String> tbcModelo;
+    public void initialize() {
+        vehiculoController = new VehiculoController();
+        cmbTipoVehiculo.getItems().addAll("Moto", "Auto", "Camioneta");
+        cmbTipoVehiculo.setOnAction(event -> actualizarCamposEspecificos());
+        initView();
+    }
 
-    @FXML
-    private Button btnVerReservasCliente1;
+    private void actualizarCamposEspecificos() {
+        vboxSpecificFields.getChildren().clear();
+        String tipoVehiculo = cmbTipoVehiculo.getValue();
 
-    @FXML
-    private TextField txfMarca;
+        switch (tipoVehiculo) {
+            case "Moto":
+                agregarCampoTransmision();
+                break;
+            case "Auto":
+                agregarCampoNumPuertas();
+                break;
+            case "Camioneta":
+                agregarCampoCapacidadCarga();
+                break;
+        }
+    }
 
-    @FXML
-    private Label lblMatricula;
+    private void agregarCampoTransmision() {
+        Label label = new Label("Transmisión:");
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll("Automática", "Manual");
+        vboxSpecificFields.getChildren().addAll(label, comboBox);
+    }
 
-    @FXML
-    private Label lblModelo;
+    private void agregarCampoNumPuertas() {
+        Label label = new Label("Número de Puertas:");
+        TextField textField = new TextField();
+        vboxSpecificFields.getChildren().addAll(label, textField);
+    }
 
-    @FXML
-    void onAgregarVehiculo(ActionEvent event) {
-        agregarVehiculo();
+    private void agregarCampoCapacidadCarga() {
+        Label label = new Label("Capacidad de Carga:");
+        TextField textField = new TextField();
+        vboxSpecificFields.getChildren().addAll(label, textField);
     }
 
     @FXML
-    void onVerVehiculo(ActionEvent event) {
-        
-    }
+    public void onAgregarVehiculo() {
+        String marca = txfMarca.getText();
+        String modelo = txfModelo.getText();
+        String matricula = txfMatricula.getText();
+        String año = txfAño.getText();
+        String tipo = cmbTipoVehiculo.getValue();
 
-    @FXML
-    void onEliminarVehiculo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onEditarVehiculo(ActionEvent event) {
-
-    }
-
-    public void agregarVehiculo(){
-        Vehiculo vehiculo = buildVehiculo();
-        vehiculoController.crearVehiculo(vehiculo);
-        listVehiculos.add(vehiculo);
+        vehiculoController.agregarVehiculo(marca, modelo, matricula, año, tipo, vboxSpecificFields.getChildren());
+        obtenerVehiculos();
         limpiarCamposVehiculo();
-        
     }
-    
-    
 
-    public void limpiarCamposVehiculo(){
+    @FXML
+    public void onEliminarVehiculo() {
+        if (selectedVehiculo != null) {
+            vehiculoController.eliminarVehiculo(selectedVehiculo);
+            obtenerVehiculos();
+            limpiarCamposVehiculo();
+        }
+    }
+
+    @FXML
+    public void onEditarVehiculo() {
+        if (selectedVehiculo != null) {
+            Vehiculo vehiculoActualizado = buildVehiculo();
+            vehiculoController.editarVehiculo(vehiculoActualizado);
+            obtenerVehiculos();
+            limpiarCamposVehiculo();
+        }
+    }
+
+    @FXML
+public void onLimpiarSeleccion() {
+    // Lógica para limpiar la selección o restablecer campos
+    limpiarCamposVehiculo(); // O cualquier otra lógica que necesites
+}
+
+    private Vehiculo buildVehiculo() {
+    String marca = txfMarca.getText();
+    String modelo = txfModelo.getText();
+    String matricula = txfMatricula.getText();
+    Year anio = Year.parse(txfAño.getText());
+    String tipoVehiculo = cmbTipoVehiculo.getValue();
+
+    switch (tipoVehiculo) {
+        case "Moto":
+            // Obtener el valor específico para Moto (por ejemplo, transmisión)
+            ComboBox<String> comboBoxTransmision = (ComboBox<String>) vboxSpecificFields.getChildren().get(1);
+            String transmision = comboBoxTransmision.getValue();
+            return new Moto(matricula, marca, modelo, anio, Transmision.valueOf(transmision.toUpperCase()));
+
+        case "Auto":
+            // Obtener el número de puertas para Auto
+            TextField textFieldNumPuertas = (TextField) vboxSpecificFields.getChildren().get(1);
+            short numPuertas = Short.parseShort(textFieldNumPuertas.getText());
+            return new Auto(matricula, marca, modelo, anio, numPuertas);
+
+        case "Camioneta":
+            // Obtener la capacidad de carga para Camioneta
+            TextField textFieldCapacidadCarga = (TextField) vboxSpecificFields.getChildren().get(1);
+            double capacidadCarga = Double.parseDouble(textFieldCapacidadCarga.getText());
+            return new Camioneta(matricula, marca, modelo, anio, capacidadCarga);
+
+        default:
+            throw new IllegalArgumentException("Tipo de vehículo no válido");
+    }
+}
+
+    private void limpiarCamposVehiculo() {
         txfAño.clear();
         txfMarca.clear();
         txfMatricula.clear();
         txfModelo.clear();
-    }
-    
-    @FXML
-    void initialize() {
-        vehiculoController = new VehiculoController(app.empresa);
-        initView();
     }
 
     public void setApp(App app) {
@@ -133,49 +163,37 @@ public class VehiculoViewController {
     }
 
     private void initView() {
-        // Traer los datos del cliente a la tabla
         initDataBinding();
-
-        // Obtiene la lista
         obtenerVehiculos();
-
-        // Limpiar la tabla
-        tblListVehiculos.getItems().clear();
-
-        // Agregar los elementos a la tabla
         tblListVehiculos.setItems(listVehiculos);
-
-        // Seleccionar elemento de la tabla
         listenerSelection();
     }
 
     private void obtenerVehiculos() {
+        listVehiculos.clear();
         listVehiculos.addAll(vehiculoController.obtenerListaVehiculos());
     }
 
-    private void listenerSelection(){
+    private void listenerSelection() {
         tblListVehiculos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedVehiculo = newSelection;
             mostrarInformacionVehiculo(selectedVehiculo);
         });
     }
 
-    private void mostrarInformacionVehiculo(Vehiculo vehiculo){
-        if(vehiculo != null){
+    private void mostrarInformacionVehiculo(Vehiculo vehiculo) {
+        if (vehiculo != null) {
             txfMarca.setText(vehiculo.getMarca());
             txfModelo.setText(vehiculo.getModelo());
             txfMatricula.setText(vehiculo.getNumeroMatricula());
-            txfAño.setText(String.valueOf(vehiculo.getAnioFabricacion()));
+            txfAño.setText(String.valueOf(vehiculo.getAnioFabricacion().getValue()));
         }
     }
 
-    private void initDataBinding(){
+    private void initDataBinding() {
         tbcMarca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));
         tbcModelo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getModelo()));
         tbcMatricula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroMatricula()));
-        tbcAño.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnioFabricacion()).asObject());
+        tbcAño.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getAnioFabricacion().getValue())));
     }
-
-    
-
 }
