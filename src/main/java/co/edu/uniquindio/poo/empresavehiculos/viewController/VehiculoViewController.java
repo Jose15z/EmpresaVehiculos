@@ -40,7 +40,7 @@ public class VehiculoViewController {
 
     @FXML
     public void initialize() {
-        vehiculoController = new VehiculoController();
+        vehiculoController = new VehiculoController(app.empresa);
         cmbTipoVehiculo.getItems().addAll("Moto", "Auto", "Camioneta");
         cmbTipoVehiculo.setOnAction(event -> actualizarCamposEspecificos());
         initView();
@@ -130,9 +130,9 @@ public void onLimpiarSeleccion() {
     switch (tipoVehiculo) {
         case "Moto":
             // Obtener el valor específico para Moto (por ejemplo, transmisión)
-            ComboBox<String> comboBoxTransmision = (ComboBox<String>) vboxSpecificFields.getChildren().get(1);
-            String transmision = comboBoxTransmision.getValue();
-            return new Moto(matricula, marca, modelo, anio, Transmision.valueOf(transmision.toUpperCase()));
+            ComboBox<Transmision> comboBoxTransmision = new ComboBox<>();
+            Transmision transmision = comboBoxTransmision.getValue();
+            return new Moto(matricula, marca, modelo, anio, transmision);
 
         case "Auto":
             // Obtener el número de puertas para Auto

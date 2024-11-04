@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.empresavehiculos.controller;
 
 import co.edu.uniquindio.poo.empresavehiculos.model.Auto;
 import co.edu.uniquindio.poo.empresavehiculos.model.Camioneta;
+import co.edu.uniquindio.poo.empresavehiculos.model.Empresa;
 import co.edu.uniquindio.poo.empresavehiculos.model.Moto;
 import co.edu.uniquindio.poo.empresavehiculos.model.Vehiculo;
 import co.edu.uniquindio.poo.empresavehiculos.model.Transmision; // Asegúrate de importar Transmision
@@ -12,14 +13,15 @@ import javafx.scene.control.TextField;
 
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class VehiculoController {
 
-    private List<Vehiculo> vehiculos;
+    private Empresa empresa;
 
-    public VehiculoController() {
-        vehiculos = new ArrayList<>();
+    public VehiculoController(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public void agregarVehiculo(String marca, String modelo, String matricula, String año, String tipo, List<Node> specificFields) {
@@ -30,7 +32,10 @@ public class VehiculoController {
             case "Moto":
                 if (specificFields.get(1) instanceof ComboBox) {
                     // Suponiendo que el ComboBox contiene valores del enum Transmision
-                    Transmision transmision = ((ComboBox<Transmision>) specificFields.get(1)).getValue();
+                    ComboBox<Transmision> comboBoxTransmision = new ComboBox<>();
+                    comboBoxTransmision.getItems().addAll(Transmision.values());
+
+                    Transmision transmision = comboBoxTransmision.getValue();
                     if (transmision != null) {
                         nuevoVehiculo = new Moto(matricula, marca, modelo, anioFabricacion, transmision);
                     } else {
@@ -61,26 +66,19 @@ public class VehiculoController {
     
 
     public void crearVehiculo(Vehiculo vehiculo) {
-        vehiculos.add(vehiculo);
+        empresa.agregarVehiculo(vehiculo);
     }
 
-    public boolean eliminarVehiculo(Vehiculo vehiculo) {
-        return vehiculos.remove(vehiculo);
+    public void eliminarVehiculo(Vehiculo vehiculo) {
+        empresa.eliminarVehiculo(vehiculo.getNumeroMatricula());
     }
 
-    public boolean editarVehiculo(Vehiculo vehiculoActualizado) {
-        for (int i = 0; i < vehiculos.size(); i++) {
-            Vehiculo vehiculo = vehiculos.get(i);
-            if (vehiculo.getNumeroMatricula().equals(vehiculoActualizado.getNumeroMatricula())) {
-                vehiculos.set(i, vehiculoActualizado);
-                return true;
-            }
-        }
-        return false;
+    public void editarVehiculo(Vehiculo vehiculoActualizado) {
+        empresa.editarVehiculo(vehiculoActualizado.getNumeroMatricula(), vehiculoActualizado);
     }
 
-    public List<Vehiculo> obtenerListaVehiculos() {
-        return new ArrayList<>(vehiculos);
+    public Collection<Vehiculo> obtenerListaVehiculos() {
+        return empresa.getVehiculos();
     }
 
     public Vehiculo crearVehiculo(String marca, String modelo, String matricula, int año, String tipo,
