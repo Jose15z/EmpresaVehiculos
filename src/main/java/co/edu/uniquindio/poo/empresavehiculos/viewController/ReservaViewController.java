@@ -34,6 +34,8 @@ public class ReservaViewController {
     @FXML
     private ResourceBundle resources;
 
+    
+
     @FXML
     private URL location;
 
@@ -214,7 +216,7 @@ public class ReservaViewController {
         tbcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         tbcVehiculo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVehiculo().getNumeroMatricula()));
         tbcDias.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getDias()).asObject());
-        tbcCosto.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getVehiculo().calcularTarifaAdicional()).asObject());
+        tbcCosto.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getCosto()).asObject());
     }
     @FXML
     void initialize() {

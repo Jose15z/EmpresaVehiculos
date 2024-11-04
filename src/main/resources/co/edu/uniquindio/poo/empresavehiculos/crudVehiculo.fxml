@@ -11,7 +11,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="533.0">
                <children>
-                  <!-- Labels and TextFields for common fields -->
+
                   <Label fx:id="lblMarca" layoutX="164.0" layoutY="69.0" text="Marca">
                      <font>
                         <Font size="20.0" />
@@ -19,7 +19,7 @@
                   </Label>
                   <TextField fx:id="txfMarca" layoutX="317.0" layoutY="70.0" />
                   
-                  <!-- Other common fields -->
+
                   <Label fx:id="lblModelo" layoutX="164.0" layoutY="106.0" text="Modelo">
                      <font>
                         <Font size="20.0" />
@@ -39,7 +39,7 @@
                   </Label>
                   <TextField fx:id="txfAño" layoutX="317.0" layoutY="178.0" />
 
-                  <!-- ComboBox for vehicle type selection -->
+
                   <Label layoutX="159.0" layoutY="37.0" text="Tipo de Vehículo">
                      <font>
                         <Font size="20.0" />
@@ -47,14 +47,13 @@
                   </Label>
                   <ComboBox fx:id="cmbTipoVehiculo" layoutX="317.0" layoutY="39.0" prefWidth="150.0" />
 
-                  <!-- Dynamic fields area for specific vehicle types -->
                   <VBox fx:id="vboxSpecificFields" layoutX="164.0" layoutY="210.0" spacing="10.0" />
 
-                  <!-- Buttons for actions -->
                   <Button fx:id="btnAgregarVehiculo" layoutX="37.0" layoutY="264.0" mnemonicParsing="false" onAction="#onAgregarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Agregar" />
                   <Button fx:id="btnEliminarVehiculo" layoutX="308.0" layoutY="264.0" mnemonicParsing="false" onAction="#onEliminarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Eliminar" />
                   <Button fx:id="btnEditarVehiculo" layoutX="164.0" layoutY="264.0" mnemonicParsing="false" onAction="#onEditarVehiculo" prefHeight="25.0" prefWidth="84.0" text="Editar" />
                   <Button fx:id="btnLimpiarSeleccion" layoutX="438.0" layoutY="264.0" mnemonicParsing="false" onAction="#onLimpiarSeleccion" text="Limpiar selección" />
+                  <Button fx:id="btnInicio" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#onAbrirMenu" text="Inicio" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

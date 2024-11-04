@@ -30,12 +30,13 @@ public class VehiculoController {
     
         switch (tipo) {
             case "Moto":
-                if (specificFields.get(1) instanceof ComboBox) {
-                    // Suponiendo que el ComboBox contiene valores del enum Transmision
-                    ComboBox<Transmision> comboBoxTransmision = new ComboBox<>();
-                    comboBoxTransmision.getItems().addAll(Transmision.values());
-
-                    Transmision transmision = comboBoxTransmision.getValue();
+                 // Obtener el ComboBox que ya existe en la interfaz (suponiendo que está en specificFields.get(1))
+                 if (specificFields.get(1) instanceof ComboBox) {
+                    ComboBox<Transmision> comboBoxTransmision = (ComboBox<Transmision>) specificFields.get(1);
+        
+                        // Obtener el valor seleccionado
+                        Transmision transmision = comboBoxTransmision.getValue();
+                    
                     if (transmision != null) {
                         nuevoVehiculo = new Moto(matricula, marca, modelo, anioFabricacion, transmision);
                     } else {

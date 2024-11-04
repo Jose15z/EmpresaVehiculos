@@ -1,11 +1,7 @@
 package co.edu.uniquindio.poo.empresavehiculos.viewController;
 
 import co.edu.uniquindio.poo.empresavehiculos.App;
-import co.edu.uniquindio.poo.empresavehiculos.model.Auto;
-import co.edu.uniquindio.poo.empresavehiculos.model.Camioneta;
-import co.edu.uniquindio.poo.empresavehiculos.model.Moto;
-import co.edu.uniquindio.poo.empresavehiculos.model.Transmision;
-import co.edu.uniquindio.poo.empresavehiculos.model.Vehiculo;
+import co.edu.uniquindio.poo.empresavehiculos.model.*;
 import co.edu.uniquindio.poo.empresavehiculos.controller.VehiculoController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,17 +15,15 @@ import java.time.Year;
 public class VehiculoViewController {
 
     @FXML
+    private Button btnInicio;
+    @FXML
     private TextField txfMarca, txfModelo, txfMatricula, txfAño;
-
     @FXML
     private ComboBox<String> cmbTipoVehiculo;
-
     @FXML
     private VBox vboxSpecificFields;
-
     @FXML
     private TableView<Vehiculo> tblListVehiculos;
-
     @FXML
     private TableColumn<Vehiculo, String> tbcMarca, tbcModelo, tbcMatricula, tbcAño;
 
@@ -37,6 +31,13 @@ public class VehiculoViewController {
     private VehiculoController vehiculoController;
     private Vehiculo selectedVehiculo;
     private App app;
+
+    private ComboBox<Transmision> comboBoxTransmision;
+
+    @FXML
+    void onAbrirMenu() {
+        app.openViewPrincipal();
+    }
 
     @FXML
     public void initialize() {
@@ -65,9 +66,12 @@ public class VehiculoViewController {
 
     private void agregarCampoTransmision() {
         Label label = new Label("Transmisión:");
-        ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.getItems().addAll("Automática", "Manual");
-        vboxSpecificFields.getChildren().addAll(label, comboBox);
+        comboBoxTransmision = new ComboBox<>();
+
+        // Agregar valores del enum Transmision al ComboBox
+        comboBoxTransmision.getItems().addAll(Transmision.values());
+
+        vboxSpecificFields.getChildren().addAll(label, comboBoxTransmision);
     }
 
     private void agregarCampoNumPuertas() {
@@ -115,47 +119,48 @@ public class VehiculoViewController {
     }
 
     @FXML
-public void onLimpiarSeleccion() {
-    // Lógica para limpiar la selección o restablecer campos
-    limpiarCamposVehiculo(); // O cualquier otra lógica que necesites
-}
-
-    private Vehiculo buildVehiculo() {
-    String marca = txfMarca.getText();
-    String modelo = txfModelo.getText();
-    String matricula = txfMatricula.getText();
-    Year anio = Year.parse(txfAño.getText());
-    String tipoVehiculo = cmbTipoVehiculo.getValue();
-
-    switch (tipoVehiculo) {
-        case "Moto":
-            // Obtener el valor específico para Moto (por ejemplo, transmisión)
-            ComboBox<Transmision> comboBoxTransmision = new ComboBox<>();
-            Transmision transmision = comboBoxTransmision.getValue();
-            return new Moto(matricula, marca, modelo, anio, transmision);
-
-        case "Auto":
-            // Obtener el número de puertas para Auto
-            TextField textFieldNumPuertas = (TextField) vboxSpecificFields.getChildren().get(1);
-            short numPuertas = Short.parseShort(textFieldNumPuertas.getText());
-            return new Auto(matricula, marca, modelo, anio, numPuertas);
-
-        case "Camioneta":
-            // Obtener la capacidad de carga para Camioneta
-            TextField textFieldCapacidadCarga = (TextField) vboxSpecificFields.getChildren().get(1);
-            double capacidadCarga = Double.parseDouble(textFieldCapacidadCarga.getText());
-            return new Camioneta(matricula, marca, modelo, anio, capacidadCarga);
-
-        default:
-            throw new IllegalArgumentException("Tipo de vehículo no válido");
+    public void onLimpiarSeleccion() {
+        limpiarCamposVehiculo(); // O cualquier otra lógica que necesites
     }
-}
+
+    public Vehiculo buildVehiculo() {
+        String marca = txfMarca.getText();
+        String modelo = txfModelo.getText();
+        String matricula = txfMatricula.getText();
+        Year anio = Year.parse(txfAño.getText());
+        String tipoVehiculo = cmbTipoVehiculo.getValue();
+
+        switch (tipoVehiculo) {
+            case "Moto":
+                // Obtener el valor específico de la transmisión seleccionada para Moto
+                Transmision transmision = comboBoxTransmision.getValue();
+                return new Moto(matricula, marca, modelo, anio, transmision);
+
+            case "Auto":
+                // Obtener el número de puertas para Auto
+                TextField textFieldNumPuertas = (TextField) vboxSpecificFields.getChildren().get(1);
+                short numPuertas = Short.parseShort(textFieldNumPuertas.getText());
+                return new Auto(matricula, marca, modelo, anio, numPuertas);
+
+            case "Camioneta":
+                // Obtener la capacidad de carga para Camioneta
+                TextField textFieldCapacidadCarga = (TextField) vboxSpecificFields.getChildren().get(1);
+                double capacidadCarga = Double.parseDouble(textFieldCapacidadCarga.getText());
+                return new Camioneta(matricula, marca, modelo, anio, capacidadCarga);
+
+            default:
+                throw new IllegalArgumentException("Tipo de vehículo no válido");
+        }
+    }
 
     private void limpiarCamposVehiculo() {
         txfAño.clear();
         txfMarca.clear();
         txfMatricula.clear();
         txfModelo.clear();
+        if (comboBoxTransmision != null) {
+            comboBoxTransmision.getSelectionModel().clearSelection();
+        }
     }
 
     public void setApp(App app) {
