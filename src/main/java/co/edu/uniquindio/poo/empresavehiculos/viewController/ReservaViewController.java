@@ -162,9 +162,10 @@ public class ReservaViewController {
 
     private void agregarReserva(){
         Reserva reserva = buildReserva();
-        reservaController.crearReserva(reserva);
-        listReservas.add(reserva);
-        limpiarCamposReserva();
+        if(reservaController.crearReserva(reserva)){;
+            listReservas.add(reserva);
+            limpiarCamposReserva();
+        }
     }
 
     private void editarReserva() {

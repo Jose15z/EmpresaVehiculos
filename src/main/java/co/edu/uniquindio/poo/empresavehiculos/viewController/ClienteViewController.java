@@ -160,10 +160,10 @@ public class ClienteViewController {
 
     private void agregarCliente() {
         Cliente cliente = buildCliente();
-        clienteController.crearCliente(cliente);
+        if (clienteController.crearCliente(cliente)){
         listClientes.add(cliente);
         limpiarCamposCliente();
-        
+        }
     }
 
     private Cliente buildCliente() {

@@ -12,8 +12,8 @@ public class ReservaController {
         this.empresa = empresa;
     }
 
-    public void crearReserva(Reserva reserva) {
-        empresa.agregarReserva(reserva);
+    public boolean crearReserva(Reserva reserva) {
+        return empresa.agregarReserva(reserva);
     }
 
     public Collection<Reserva> obtenerListarReservas() {

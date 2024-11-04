@@ -12,8 +12,8 @@ public class ClienteController {
         this.empresa = empresa;
     }
 
-    public void crearCliente(Cliente cliente) {
-        empresa.agregarCliente(cliente);
+    public boolean crearCliente(Cliente cliente) {
+        return empresa.agregarCliente(cliente);
     }
 
     public Collection<Cliente> obtenerListaClientes() {

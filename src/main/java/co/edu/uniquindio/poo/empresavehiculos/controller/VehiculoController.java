@@ -66,8 +66,8 @@ public class VehiculoController {
     }
     
 
-    public void crearVehiculo(Vehiculo vehiculo) {
-        empresa.agregarVehiculo(vehiculo);
+    public boolean crearVehiculo(Vehiculo vehiculo) {
+        return empresa.agregarVehiculo(vehiculo);
     }
 
     public void eliminarVehiculo(Vehiculo vehiculo) {

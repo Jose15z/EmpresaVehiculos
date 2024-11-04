@@ -108,10 +108,14 @@ public class Empresa {
      * Método para agregar un nuevo vehículo
      * @param vehiculo a agregar
      */
-    public void agregarVehiculo(Vehiculo vehiculo){
+    public boolean agregarVehiculo(Vehiculo vehiculo){
+        boolean centinela = false;
+        
         if(!verificarVehiculo(vehiculo.getNumeroMatricula())){
             vehiculos.add(vehiculo);
+            centinela = true;
         }
+        return centinela;
     }
 
     /**
@@ -180,10 +184,13 @@ public class Empresa {
      * Método para agregar una nueva reserva
      * @param reserva nueva
      */
-    public void agregarReserva(Reserva reserva){
+    public boolean agregarReserva(Reserva reserva){
+        boolean centinela = false;
         if(!verificarReserva(reserva.getId())){
             reservas.add(reserva);
+            centinela = true;
         }
+        return centinela;
     }
 
     /**
@@ -254,10 +261,13 @@ public class Empresa {
      * Método para agregar un nuevo cliente
      * @param cliente nuevo
      */
-    public void agregarCliente(Cliente cliente){
-        if(!verificarCliente(cliente.getCedula())){
+    public boolean agregarCliente(Cliente cliente) {
+        boolean centinela = false;
+        if (!verificarCliente(cliente.getCedula())) {
             clientes.add(cliente);
+            centinela = true;
         }
+        return centinela;
     }
 
     /**
