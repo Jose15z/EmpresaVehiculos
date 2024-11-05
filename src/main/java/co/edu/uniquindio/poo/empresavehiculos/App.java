@@ -12,10 +12,10 @@ import co.edu.uniquindio.poo.empresavehiculos.model.Auto;
 import co.edu.uniquindio.poo.empresavehiculos.model.Camioneta;
 import co.edu.uniquindio.poo.empresavehiculos.model.Cliente;
 import co.edu.uniquindio.poo.empresavehiculos.model.Empresa;
-import co.edu.uniquindio.poo.empresavehiculos.model.Moto;
+
 import co.edu.uniquindio.poo.empresavehiculos.model.Reserva;
-import co.edu.uniquindio.poo.empresavehiculos.model.Transmision;
-import co.edu.uniquindio.poo.empresavehiculos.model.Vehiculo;
+
+
 import co.edu.uniquindio.poo.empresavehiculos.viewController.MenuController;
 import co.edu.uniquindio.poo.empresavehiculos.viewController.ClienteViewController;
 import co.edu.uniquindio.poo.empresavehiculos.viewController.ReservaViewController;

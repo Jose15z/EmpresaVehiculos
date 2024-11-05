@@ -68,7 +68,6 @@ public class VehiculoViewController {
         Label label = new Label("Transmisión:");
         comboBoxTransmision = new ComboBox<>();
 
-        // Agregar valores del enum Transmision al ComboBox
         comboBoxTransmision.getItems().addAll(Transmision.values());
 
         vboxSpecificFields.getChildren().addAll(label, comboBoxTransmision);
@@ -120,7 +119,7 @@ public class VehiculoViewController {
 
     @FXML
     public void onLimpiarSeleccion() {
-        limpiarCamposVehiculo(); // O cualquier otra lógica que necesites
+        limpiarCamposVehiculo();
     }
 
     public Vehiculo buildVehiculo() {
@@ -132,18 +131,15 @@ public class VehiculoViewController {
 
         switch (tipoVehiculo) {
             case "Moto":
-                // Obtener el valor específico de la transmisión seleccionada para Moto
                 Transmision transmision = comboBoxTransmision.getValue();
                 return new Moto(matricula, marca, modelo, anio, transmision);
 
             case "Auto":
-                // Obtener el número de puertas para Auto
                 TextField textFieldNumPuertas = (TextField) vboxSpecificFields.getChildren().get(1);
                 short numPuertas = Short.parseShort(textFieldNumPuertas.getText());
                 return new Auto(matricula, marca, modelo, anio, numPuertas);
 
             case "Camioneta":
-                // Obtener la capacidad de carga para Camioneta
                 TextField textFieldCapacidadCarga = (TextField) vboxSpecificFields.getChildren().get(1);
                 double capacidadCarga = Double.parseDouble(textFieldCapacidadCarga.getText());
                 return new Camioneta(matricula, marca, modelo, anio, capacidadCarga);

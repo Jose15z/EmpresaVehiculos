@@ -1,7 +1,6 @@
 package co.edu.uniquindio.poo.empresavehiculos.controller;
 
 import co.edu.uniquindio.poo.empresavehiculos.model.Reserva;
-import co.edu.uniquindio.poo.empresavehiculos.model.Cliente;
 import co.edu.uniquindio.poo.empresavehiculos.model.Empresa;
 import java.util.Collection;
 

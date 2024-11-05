@@ -5,14 +5,13 @@ import co.edu.uniquindio.poo.empresavehiculos.model.Camioneta;
 import co.edu.uniquindio.poo.empresavehiculos.model.Empresa;
 import co.edu.uniquindio.poo.empresavehiculos.model.Moto;
 import co.edu.uniquindio.poo.empresavehiculos.model.Vehiculo;
-import co.edu.uniquindio.poo.empresavehiculos.model.Transmision; // Asegúrate de importar Transmision
+import co.edu.uniquindio.poo.empresavehiculos.model.Transmision;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,11 +29,9 @@ public class VehiculoController {
     
         switch (tipo) {
             case "Moto":
-                 // Obtener el ComboBox que ya existe en la interfaz (suponiendo que está en specificFields.get(1))
                  if (specificFields.get(1) instanceof ComboBox) {
                     ComboBox<Transmision> comboBoxTransmision = (ComboBox<Transmision>) specificFields.get(1);
         
-                        // Obtener el valor seleccionado
                         Transmision transmision = comboBoxTransmision.getValue();
                     
                     if (transmision != null) {

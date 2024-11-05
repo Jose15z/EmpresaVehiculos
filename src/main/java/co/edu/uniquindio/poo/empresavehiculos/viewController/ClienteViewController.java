@@ -1,23 +1,18 @@
 package co.edu.uniquindio.poo.empresavehiculos.viewController;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import co.edu.uniquindio.poo.empresavehiculos.App;
 import co.edu.uniquindio.poo.empresavehiculos.controller.ClienteController;
 import co.edu.uniquindio.poo.empresavehiculos.model.Cliente;
@@ -116,19 +111,14 @@ public class ClienteViewController {
 
     
     private void initView() {
-        // Traer los datos del cliente a la tabla
         initDataBinding();
 
-        // Obtiene la lista
         obtenerClientes();
 
-        // Limpiar la tabla
         tblListaClientes.getItems().clear();
 
-        // Agregar los elementos a la tabla
         tblListaClientes.setItems(listClientes);
 
-        // Seleccionar elemento de la tabla
         listenerSelection();
     }
 
@@ -136,7 +126,6 @@ public class ClienteViewController {
         tbcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCedula()));
         tbcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         tbcTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
-        // Usamos SimpleObjectProperty para manejar Double y Integer correctamente
     }
 
     private void obtenerClientes() {

@@ -1,10 +1,7 @@
 package co.edu.uniquindio.poo.empresavehiculos.viewController;
 
 import co.edu.uniquindio.poo.empresavehiculos.App;
-import co.edu.uniquindio.poo.empresavehiculos.model.Cliente;
 import co.edu.uniquindio.poo.empresavehiculos.model.Reserva;
-import co.edu.uniquindio.poo.empresavehiculos.model.Vehiculo;
-import co.edu.uniquindio.poo.empresavehiculos.controller.ClienteController;
 import co.edu.uniquindio.poo.empresavehiculos.controller.ReservaController;
 
 import java.net.URL;
@@ -15,7 +12,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -124,19 +120,14 @@ public class ReservaViewController {
 
 
     private void initView() {
-        // Traer los datos del cliente a la tabla
         initDataBinding();
 
-        // Obtiene la lista
         obtenerReservas();
 
-        // Limpiar la tabla
         tblListaReservas.getItems().clear();
 
-        // Agregar los elementos a la tabla
         tblListaReservas.setItems(listReservas);
 
-        // Seleccionar elemento de la tabla
         listenerSelection();
     }
 
@@ -170,17 +161,13 @@ public class ReservaViewController {
 
     private void editarReserva() {
         if (selectedReserva == null) {
-            // Mostrar mensaje al usuario de que debe seleccionar una reserva para editar
             return;
         }
     
-        // Crear una nueva reserva con los valores actualizados
         Reserva nuevaReserva = buildReserva();
     
-        // Actualizar la reserva seleccionada en el controlador
         reservaController.editarReserva(selectedReserva.getId(), nuevaReserva);
     
-        // Actualizar la lista y refrescar la tabla
         int index = listReservas.indexOf(selectedReserva);
         if (index >= 0) {
             listReservas.set(index, nuevaReserva);
